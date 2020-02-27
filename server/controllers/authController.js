@@ -2,11 +2,16 @@ const bcrypt = require('bcryptjs');
 
 const register = (req, res) => {
     const db = req.app.get('db')
-    const {username, password, profile_img} = req.body;
+    const {username, password} = req.body;
     bcrypt.hash(password, 12).then((hash) => {
-        db.authentication.registerUser([username, hash, profile_img])
-        .then(user => {
-            res.sendStatus(200)
+        db.authentication.registerUser([username, hash])
+        .then(response => {
+            const {user_id, username} = response[0]
+            req.session.user={
+                id: user_id,
+                username: username
+            }
+            res.status(200).json(req.session.user)
         })
         .catch(error => {
             console.log(error)
@@ -27,13 +32,12 @@ const login = (req, res) => {
         } else {
             bcrypt.compare(password, user[0].password).then(areEqual => {
                 if(areEqual) {
-                    const {user_id, username, profile_img} = user[0]
+                    const {user_id, username} = user[0]
                     req.session.user = {
                         id: user_id,
-                        username: username,
-                        profile_img: profile_img
+                        username: username
                     }
-                    res.status(200).json(username)
+                    res.status(200).json(req.session.user)
                 } else {
                     res.status(403).json('incorrect username or password')
                 }
