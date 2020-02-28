@@ -7,7 +7,7 @@ import Home from './components/home'
 
 export default (
     <Switch>
-        <Route component={GuestHome} exaxt path='/' />
-        <Route component={Home} path='home' />
+        <Route component={GuestHome} exact path='/' />
+        {/* <Route component={Home} path='home' /> */}
     </Switch>
 )

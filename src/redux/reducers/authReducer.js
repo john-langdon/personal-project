@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useImperativeHandle } from 'react';
 
 const initialState = {
     username: '',
@@ -11,8 +12,9 @@ const initialState = {
 //constants
 const UPDATE_STATE = 'UPDATE_STATE';
 const RESET_FIELDS = 'RESET_FIELDS';
-const REGISTER_USERS = 'REGISTER_USER';
+const REGISTER_USER = 'REGISTER_USER';
 const LOGIN_USER = 'LOGIN_USER';
+const LOGOUT_USER = 'LOGOUT_USER';
 const GET_USER = 'GET_USER';
 
 export const updateState = e => {
@@ -39,7 +41,17 @@ export const registerUser = (username, password, profile_img) => {
     }
 }
 
-export const logout = () => {
+export const loginUser = (username, password) => {
+    return {
+        type: LOGIN_USER,
+        payload: axios.post('/auth/login', {
+            username: username,
+            password: password
+        })
+    }
+}
+
+export const logOut = () => {
     return {
         type: LOGOUT_USER,
         payload: axios.get('/auth/logout')
@@ -80,7 +92,7 @@ export default function authReducer(state=initialState, action) {
                     ...state,
                     loading: true
                 }
-            case `$(LOGIN_USER)_FULFILLED`:
+            case `${LOGIN_USER}_FULFILLED`:
                 return {
                     ...state,
                     loading: false,
