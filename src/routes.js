@@ -3,11 +3,11 @@ import {Switch, Route} from 'react-router-dom'
 
 //components
 import GuestHome from './components/guestHome'
-import Home from './components/home'
+import Home from './components/Home/home'
 
 export default (
     <Switch>
         <Route component={GuestHome} exact path='/' />
-        {/* <Route component={Home} path='home' /> */}
+        <Route component={Home} path='/home' />
     </Switch>
 )

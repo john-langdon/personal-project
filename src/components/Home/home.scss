@@ -1,0 +1,30 @@
+.cocktails{
+    display: flex;
+    flex-wrap: wrap;
+    .cocktail-image{
+        width:200px;
+        height: 200px;
+    }
+    .card {
+        margin-top: 40px;
+        margin-right: 40px;
+        cursor:pointer;
+        translate: scale(1.2);
+    }
+    .favorite-image{
+        height:30px;
+        width:30px;
+    }
+}
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+}
+.favorites-wrapper{
+    text-align: right;
+}
+.favorites{
+    margin-right: 35px;
+    text-decoration: underline;
+    cursor: pointer;
+}
