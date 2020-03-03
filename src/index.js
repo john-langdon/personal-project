@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import store from './redux/store';
 import { Provider } from 'react-redux';
-import 'bootswatch/dist/cyborg/bootstrap.min.css';
+import 'bootswatch/dist/slate/bootstrap.min.css';
 // import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

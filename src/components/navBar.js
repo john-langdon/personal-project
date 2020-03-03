@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { connect} from 'react-redux'
 
 import { logOut, getUser } from './../redux/reducers/authReducer'
 
@@ -14,11 +14,11 @@ class NavBar extends Component {
         return (
             <nav style={{display: 'flex', justifyContent: 'space-evenly', border: '1px solid grey', width: '100%', boxShadow: 'rgba(0, 0, 0, 0.3) 0px 1px 5px 0px', position: 'relative'}}>
                 <ul style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', width: '30vw' }}>
-                    <Link to='/home'><li style={{ listStyle: 'none', textDecoration: 'none' }}>Home</li></Link>
-                    <Link to='/post-review'><li style={{ listStyle: 'none', textDecoration: 'none' }}>Post Reviews</li></Link>
+            
                     <Link to='/'><li onClick={this.handleClickLogout} style={{ listStyle: 'none', textDecoration: 'none' }}>Logout</li></Link>
                 </ul>
-                <h2>Welcome {this.props.user}</h2>
+                <h2>Welcome to the Cocktail App {this.props.user}</h2>
+                <Link to="/favorites"><h5 >View My Favorites</h5></Link>
             </nav>
         )
     }

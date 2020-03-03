@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import NavBar from "../navBar";
-import { connect, connectAdvanced } from "react-redux";
-import axios from "axios";
-import "./home.scss";
+import React, { Component } from 'react';
+import NavBar from '../navBar';
+import { connect, connectAdvanced } from 'react-redux';
+import axios from 'axios';
+import './home.scss';
 
 class Home extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class Home extends Component {
 
   getData() {
     axios
-      .get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail")
+      .get("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
       .then(resp => {
         console.log(resp.data);
         this.setState({ drinks: resp.data.drinks }, () => {
@@ -32,18 +32,21 @@ class Home extends Component {
     //will call API
   }
 
-  deleteDrink() {
+  removeFromFavorites() {
     //will call API
   }
 
   addDrink() {
-    //will call API
+    //will call API -- not needed?
   }
 
-  viewMyFavorites() {
+  viewMyFavorites = () => {
       this.setState({isDisplay:true})
     //will call API
   }
+
+
+
 
   viewModal() {
       console.log("model displayed")
@@ -104,7 +107,7 @@ class Home extends Component {
                 type="button"
                 class="btn btn-danger"
                 onClick={() => {
-                  this.deleteDrink(drink.idDrink);
+                  this.removeFromFavorites(drink.idDrink);
                 }}
               >
                 Delete
@@ -138,14 +141,15 @@ class Home extends Component {
     return (
       <div className="page">
         <div className="favorites-wrapper">
-          <h5
+            <NavBar viewMyFavorites={this.viewMyFavorites}/>
+          {/* <h5
             className="favorites"
             onClick={() => {
               this.viewMyFavorites();
             }}
           >
             View my favorites
-          </h5>
+          </h5> */}
         </div>
         {
             isDisplay
