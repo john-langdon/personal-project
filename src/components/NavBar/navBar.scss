@@ -1,0 +1,15 @@
+.navBar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.viewMyFavorites {
+  display: flex;
+  justify-content: center;
+}
+
+.logOut {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 45px;
+}

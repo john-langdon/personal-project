@@ -9,6 +9,7 @@ const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
 //controllers
 const authentication = require('./controllers/authController')
+const cocktails = require('./controllers/cocktailsController')
 // const {}
 
 massive(CONNECTION_STRING)
@@ -39,9 +40,9 @@ massive(CONNECTION_STRING)
     app.get('/auth/logout', authentication.logout);
     app.get('/auth/user', authentication.getUser);
 
-    //cocktails
+    //endpoints for cocktails
     // app.get('/api/cocktails', getCocktails)
-    // app.post('/api/cocktails', postCocktail)
+    app.post('/api/cocktails', cocktails.postCocktails)
     // app.put('/api/cocktails/:id', editCocktail)
     // app.delete('/api/cocktails/:id', deleteCocktail)
 

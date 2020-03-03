@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import NavBar from '../navBar';
-import { connect, connectAdvanced } from 'react-redux';
-import axios from 'axios';
-import './home.scss';
+import React, { Component } from "react";
+import NavBar from "./../NavBar/navBar";
+import { connect, connectAdvanced } from "react-redux";
+import axios from "axios";
+import "./home.scss";
 
 class Home extends Component {
   constructor(props) {
@@ -41,15 +41,12 @@ class Home extends Component {
   }
 
   viewMyFavorites = () => {
-      this.setState({isDisplay:true})
+    this.setState({ isDisplay: true });
     //will call API
-  }
-
-
-
+  };
 
   viewModal() {
-      console.log("model displayed")
+    console.log("model displayed");
     return (
       <div class="modal">
         <div class="modal-dialog" role="document">
@@ -136,12 +133,12 @@ class Home extends Component {
     );
   }
   render() {
-    const {isDisplay} = this.state;
-    console.log(isDisplay)
+    const { isDisplay } = this.state;
+    console.log(isDisplay);
     return (
       <div className="page">
         <div className="favorites-wrapper">
-            <NavBar viewMyFavorites={this.viewMyFavorites}/>
+          <NavBar viewMyFavorites={this.viewMyFavorites} />
           {/* <h5
             className="favorites"
             onClick={() => {
@@ -151,13 +148,7 @@ class Home extends Component {
             View my favorites
           </h5> */}
         </div>
-        {
-            isDisplay
-            ?
-            this.viewModal()
-            :
-            null
-        }
+        {isDisplay ? this.viewModal() : null}
         <div className="cocktails">{this.mappedCocktails()}</div>
       </div>
     );
