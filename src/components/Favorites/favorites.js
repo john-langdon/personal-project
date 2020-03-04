@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import NavBar from '../navBar';
+import NavBar from '../NavBar/navBar';
 // import { connect, connectAdvanced } from 'react-redux';
 // import axios from 'axios';
 // import '.favorites.scss';
@@ -61,6 +61,7 @@ class Favorites extends Component {
         // console.log(isDisplay)
         return (
           <div className="page">
+            <NavBar />
             <h1>Your Favorites Route</h1>
           </div>
         );

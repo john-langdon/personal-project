@@ -30,13 +30,15 @@ class Home extends Component {
 
   addToFavorites() {
     //will call API
-  }
+    // axios 
+}
 
   removeFromFavorites() {
     //will call API
   }
 
-  addDrink() {
+  addCocktail() {
+
     //will call API -- not needed?
   }
 
@@ -111,9 +113,6 @@ class Home extends Component {
               </button>
               <img
                 src="https://toppng.com/uploads/preview/5-point-stars-png-star-icon-flat-11562958768wpf63hu4tq.png"
-                onClick={() => {
-                  this.addToFavorites(drink.idDrink);
-                }}
                 className="favorite-image"
                 alt="img"
               />
@@ -121,7 +120,7 @@ class Home extends Component {
                 type="button"
                 class="btn btn-primary"
                 onClick={() => {
-                  this.addDrink(drink.idDrink);
+                  this.addToFavorites(drink.idDrink);
                 }}
               >
                 Add

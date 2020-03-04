@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import "./navBar.scss";
+import "./navBar.css";
 
 import { logOut, getUser } from "../../redux/reducers/authReducer";
 
@@ -14,7 +14,7 @@ class NavBar extends Component {
     return (
       <nav>
         <Link to="/" className="logOut">
-          <li onClick={this.handleClickLogout}>Logout</li>
+          <p onClick={this.handleClickLogout}>Logout</p>
         </Link>
         <h2 className="navBar">
           Welcome to the Cocktail App {this.props.user}
