@@ -43,7 +43,7 @@ export const registerUser = (username, password, profile_img) => {
 export const loginUser = (username, password) => {
     return {
         type: LOGIN_USER,
-        payload: axios.post('/auth/login', {
+        payload: axios.post('auth/login', {
             username: username,
             password: password
         })

@@ -5,6 +5,8 @@ import App from './App';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import 'bootswatch/dist/slate/bootstrap.min.css';
+import { HashRouter, BrowserRouter } from 'react-router-dom';
+const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter;
 // import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

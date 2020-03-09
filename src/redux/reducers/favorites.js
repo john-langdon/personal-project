@@ -5,13 +5,11 @@ const initialState = {
     favorites: []
 }
 
-const UPDATE_STATE = 'UPDATE_STATE';
+const UPDATE_FAVORITES = 'UPDATE_FAVORITES';
 
-
-
-export const updateState = e => {
+export const updateFavorites = e => {
     return {
-        type: UPDATE_STATE,
+        type: UPDATE_FAVORITES,
         payload: e
     }
 }
@@ -20,10 +18,10 @@ export const updateState = e => {
 export default function favorites(state=initialState, action) {
     const {type, payload} = action;
     switch(type) {
-        case UPDATE_STATE:
+        case UPDATE_FAVORITES:
             return {
                 ...state,
-                ...payload
+                favorites: payload
             }
             default:
                 return state;

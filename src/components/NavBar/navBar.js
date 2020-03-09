@@ -16,12 +16,12 @@ class NavBar extends Component {
         <Link to="/" className="logOut">
           <p onClick={this.handleClickLogout}>Logout</p>
         </Link>
-        <h2 className="navBar">
+        {/* <h2 className="navBar">
           Welcome to the Cocktail App {this.props.user}
-        </h2>
-        <Link to="/favorites" className="viewMyFavorites">
+        </h2> */}
+        {/* <Link to="/favorites" className="viewMyFavorites">
           <h5>View My Favorites</h5>
-        </Link>
+        </Link> */}
       </nav>
     );
   }
