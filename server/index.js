@@ -15,7 +15,7 @@ const cors = require('cors')
 
 const app = express()
 
-app.use(express.static(__dirname, '/./..build'))
+app.use( express.static( `${__dirname}/../build` ));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '../build/index.html'))
@@ -121,7 +121,7 @@ massive(CONNECTION_STRING)
     app.post('/auth/performlogin', authentication.performLogin);
     app.get('/auth/logout', authentication.logout);
     app.get('/auth/user', authentication.getUser);
-    app.put('/auth/usercity', authentication.getCity);
+    // app.put('/auth/usercity', authentication.getCity);
     // app.put('/auth/user', authentication.changePassword); // use body for password and get user id from req.session.user.id. Then update table with this info.
         // user will send new password from front, hash it, and update user's PW in table where user id matches
 
@@ -135,7 +135,7 @@ massive(CONNECTION_STRING)
     app.post('/api/favorites', cocktails.addToFav); // use re   q.body (for the cocktail_id)
     app.get('/api/favorites', cocktails.getFavs); // use re   q.body (for the cocktail_id)
     app.delete('/api/favorites', cocktails.delFavs);
-    app.put('/api/city', users.editCity);
+    // app.put('/api/city', users.editCity);
         // send the drink id from the front and add it to the table with the user's id
     // app.get('/api/favorites', cocktails.getFavs); // dont need body or params, just use req.session.user.id
         // get all drinks from the favorites table that match the user id
