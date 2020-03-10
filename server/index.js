@@ -3,7 +3,7 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const { Pool,Client } = require('pg');
-const path = require('path')
+// const path = require('path')
 // const passport = require('passport');
 // const LocalStrategy = require('passport-local').Strategy;
 // const JwtStrategy = require('passport-jwt').Strategy;
@@ -15,14 +15,14 @@ const cors = require('cors')
 
 const app = express()
 
-if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
     // Set static folder
+    
+    // app.get("*", (req, res) => {
+        //     res.sendFile(path.join(__dirname + '../build/index.html'))
+        // }); 
+    // }
     app.use( express.static( `${__dirname}/../build` ));
-  
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname + '../build/index.html'))
-    }); 
-  }
 
 
 
@@ -30,6 +30,18 @@ if (process.env.NODE_ENV === "production") {
 
 let {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 SERVER_PORT = 4000
+
+app.use(
+    session({
+        saveUninitialized: true,
+        resave: false,
+        secret: SESSION_SECRET,
+        cookie: {
+            secure:false,
+            maxAge: 1000 * 60 * 60 * 24 * 7 * 52 *1000
+        }
+    })
+)
 //SESSION_SECRET = 'secret_password';
 // CONNECTION_STRING = "postgres://znxrsvpqhazlce:c00c5f9f0f29756aebb0c65b5e57ffaf5a46133d4d5d0fa856f3297c9a666512@:5432/d3u1anqri7blqe?ssl=true"
 
@@ -107,17 +119,7 @@ massive(CONNECTION_STRING)
         //process.
     })
 
-    app.use(
-        session({
-            saveUninitialized: true,
-            resave: false,
-            secret: SESSION_SECRET,
-            cookie: {
-                secure:false,
-                maxAge: 1000 * 60 * 60 * 24 * 7 * 52 *1000
-            }
-        })
-    )
+    
 
     app.use(express.json());
     app.use(cors());
