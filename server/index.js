@@ -15,11 +15,18 @@ const cors = require('cors')
 
 const app = express()
 
-app.use( express.static( `${__dirname}/../build` ));
+if (process.env.NODE_ENV === "production") {
+    // Set static folder
+    app.use( express.static( `${__dirname}/../build` ));
+  
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname + '../build/index.html'))
+    }); 
+  }
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '../build/index.html'))
-});
+
+
+
 
 let {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 SERVER_PORT = 4000

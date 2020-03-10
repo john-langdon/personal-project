@@ -5,8 +5,7 @@ import {
   updateState,
   resetFields,
   registerUser,
-  loginUser,
-  city
+  loginUser
 } from "../redux/reducers/authReducer";
 
 class Authentication extends Component {
