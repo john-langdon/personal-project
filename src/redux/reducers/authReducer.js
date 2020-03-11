@@ -4,7 +4,7 @@ const initialState = {
     username: '',
     password: '',
     profile_img: '',
-    user: [],
+    user: {},
     loading: false
 }
 
@@ -92,10 +92,16 @@ export default function authReducer(state=initialState, action) {
                     loading: true
                 }
             case `${LOGIN_USER}_FULFILLED`:
+                console.log(payload.data);
                 return {
                     ...state,
                     loading: false,
                     user: payload.data
+                }
+            case `${LOGOUT_USER}_FULFILLED`:
+                return {
+                    ...state,
+                    user: []
                 }
             default:
                 return state;

@@ -4,13 +4,15 @@ const register = (req, res) => {
     const db = req.app.get('db')
     const {username, password} = req.body;
     bcrypt.hash(password, 12).then((hash) => {
-        db.users.save([username, hash])
+        db.authentication.users([username, hash])
         .then(response => {
             const {user_id, username} = response[0]
             req.session.user={
                 id: user_id,
                 username: username
             }
+            console.log('REGISTERED!!!')
+            console.log(req.session.user)
             res.status(200).json(req.session.user)
         })
         .catch(error => {
@@ -35,22 +37,24 @@ const login = (req,res) => {
     const db = req.app.get('db');
    // const token = authenticate.getToken({_id: req.user._id});
     const {username, password} = req.body;
-    db.users.findOne({username:username}).then(user => {
+    console.log(req.body)
+    db.authentication.getUser(username).then(user => {
         console.log("user", user);
         if(user.length === 0) {
-            cb(null, false);
-            res.status(400).json('username not found')
+            // cb(null, false);
+            res.status(500).json('username not found')
         } else {
-            bcrypt.compare(password, user.password).then(areEqual => {
+            bcrypt.compare(password, user[0].password).then(areEqual => {
                 console.log("areEqual", areEqual);
                 if(areEqual) {
                     // cb(null, { id: first.id, username: first.username, type: first.type });
                     req.session.user = {
-                        id: user.user_id,
-                        username: user.username
+                        id: user[0].user_id,
+                        username: user[0].username
                     }
+                        console.log('LOGGED IN!!!')
                     console.log(req.session)
-                    res.status(200).json(req.session)
+                    res.status(200).json(req.session.user)
                 } else {
                     // cb(null, false)
                     res.status(403).json('incorrect username or password')

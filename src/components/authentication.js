@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   updateState,
@@ -8,32 +8,45 @@ import {
   loginUser
 } from "../redux/reducers/authReducer";
 
+
+
 class Authentication extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shouldRedirect: false,
+    };
+  }
   handleChange = e => {
     this.props.updateState({ [e.target.name]: e.target.value });
   };
-
+  
   handleClickRegister = () => {
     this.props
-      .registerUser(this.props.username, this.props.password)
+    .registerUser(this.props.username, this.props.password)
+    .then(() => {
+      this.props.loginUser(this.props.username, this.props.password);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  };
+
+  handleClickLogin = () => {
+    this.props
+      .loginUser(this.props.username, this.props.password)
       .then(() => {
-        this.props.loginUser(this.props.username, this.props.password);
+       this.setState ({shouldRedirect: true})
       })
       .catch(error => {
         console.log(error);
       });
   };
 
-  handleClickLogin = () => {
-    this.props
-      .loginUser(this.props.username, this.props.password)
-      .then(() => {})
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
   render() {
+    if(this.props.user.id) {
+      return <Redirect to = "/home" />
+    }
     return (
       <div>
         <section>
@@ -50,9 +63,9 @@ class Authentication extends Component {
             />
           </div>
           <br />
-          <Link to="/home">
+          {/* <Link to="/home"> */}
             <button onClick={this.handleClickLogin}>Login</button>
-          </Link>
+          {/* </Link> */}
         </section>
         <br />
         <section>
@@ -80,7 +93,8 @@ class Authentication extends Component {
 const mapStateToProps = state => {
   return {
     username: state.authReducer.username,
-    password: state.authReducer.password
+    password: state.authReducer.password,
+    user: state.authReducer.user
   };
 };
 
