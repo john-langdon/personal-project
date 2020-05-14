@@ -9,7 +9,6 @@ function App() {
     <HashRouter>
       <div className="App">
         <NavBar/>
-        <div>Cocktails App</div>
         {routes}
       </div>
     </HashRouter>
