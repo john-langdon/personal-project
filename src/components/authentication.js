@@ -22,17 +22,21 @@ class Authentication extends Component {
   };
   
   handleClickRegister = () => {
+    if(this.props.username) {
     this.props
     .registerUser(this.props.username, this.props.password)
     .then(() => {
+      console.log(" registered ")
       this.props.loginUser(this.props.username, this.props.password);
     })
     .catch(error => {
       console.log(error);
     });
+  }
   };
 
   handleClickLogin = () => {
+    if(this.props.username) {
     this.props
       .loginUser(this.props.username, this.props.password)
       .then(() => {
@@ -41,7 +45,9 @@ class Authentication extends Component {
       .catch(error => {
         console.log(error);
       });
+    }
   };
+
 
   render() {
     if(this.props.user.id) {
@@ -81,9 +87,7 @@ class Authentication extends Component {
             />
           </div>
           <br />
-          <Link to="/home">
             <button onClick={this.handleClickRegister}>Register</button>
-          </Link>
         </section>
       </div>
     );

@@ -6,11 +6,11 @@ const register = (req, res) => {
     bcrypt.hash(password, 12).then((hash) => {
         db.authentication.users([username, hash])
         .then(response => {
-            const {user_id, username} = response[0]
-            req.session.user={
-                id: user_id,
-                username: username
-            }
+            // const {user_id, username} = response[0]
+            // req.session.user={
+            //     id: user_id,
+            //     username: username
+            // }
             console.log('REGISTERED!!!')
             console.log(req.session.user)
             res.status(200).json(req.session.user)
